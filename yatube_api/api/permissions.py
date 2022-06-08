@@ -1,6 +1,10 @@
-from requests import request
 from rest_framework import permissions, status
 from rest_framework.response import Response
+
+
+class FollowIsExists(permissions.BasePermission):
+    def has_permissions(self, request, view):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class GroupReadOnly(permissions.BasePermission):

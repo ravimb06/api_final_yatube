@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, filters
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.pagination import LimitOffsetPagination
-
 
 from posts.models import Post, Group, Follow, User
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
@@ -64,7 +62,6 @@ class FollowViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
-        if self.request.data['following'] == self.request.user.username:
-            raise PermissionDenied('На  самого себя подписываться нельзя!')
-        following = User.objects.get(username=self.request.data['following'])
-        serializer.save(user=self.request.user, following=following)
+        serializer.save(user=self.request.user, following=User.objects.get(
+            username=self.request.data['following'])
+        )
