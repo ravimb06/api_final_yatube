@@ -41,3 +41,11 @@ python3 manage.py migrate
 ```
 python3 manage.py runserver
 ```
+
+### Использованные технологии:
+- Python 3
+- Django
+- Django REST framework
+
+# Автор:
+Али Богатырев. <https://github.com/ravimb06>
